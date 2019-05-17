@@ -13,65 +13,48 @@ public class TestClass extends BaseClass{
         driver.manage().window().maximize();
 
 
-        //Verify Main Page in the big_Fish_Games
+        //Verify Main Page in the August.com
 
         Main_Page main_page = new Main_Page();
         main_page.navigate_To_Page_and_Check_Title(driver);
-        Assert.assertTrue(main_page.is_Sign_Up_ButtonPresent(driver));
-        main_page.click_Sign_Up_Button(driver);
+        Assert.assertTrue(main_page.is_twitter_IconPresent(driver));
+        Assert.assertTrue(main_page.is_Your_Cart_IconPresent(driver));
+        main_page.click_Cart_Icon(driver);
+        Assert.assertTrue(main_page.verify_Your_cart_Is_empty(driver));
+        main_page.click_Keepshoping_Button(driver);
+
+
+        //  Add Items to the chopping cart
+
+
+        Add_Items add_items = new Add_Items();
+
+        Assert.assertTrue(add_items.is_smartLock_Visibale(driver));
+        pause(1);
+        add_items.click_Smart_Lock(driver);
+        Assert.assertTrue(add_items.is_Add_To_Cart_Visibele(driver));
+        add_items.add_To_cart(driver);
+        pause(1);
+        Assert.assertTrue(add_items.is_Smart_Lock_Added(driver));
+        add_items.click_Procee_button(driver);
+
+
+        // Create a SignIpForms for chopping cart
 
 
         SignIpForms signIpForms = new SignIpForms();
 
-        Assert.assertTrue(signIpForms.is_Sign_ME_ButtonPresen(driver));
-        signIpForms.clickCheckbox(driver);
-        signIpForms.click_Sign_Me_Button(driver);
-        signIpForms.waitForCreateAccountToBecomeVisible(driver,1);
+        signIpForms.waitForAugustHomeToBecomeVisible(driver,2);
+        signIpForms.getNewAugustHomeWindow(driver);
 
+        // Verify Table content information
 
-        // Create an account or sign in to continue.
-
-        signIpForms.sentEmail(driver);
-        signIpForms.sentPassword(driver);
-        signIpForms.rePassword(driver);
-        signIpForms.setUsername(driver);
-
-
-        // set Date of Birth
-
-        signIpForms.monthOfBirth(driver);
-        signIpForms.dataOfBird(driver);
-        signIpForms.yearOfbird(driver);
-
+        main_page.closeChopingCart(driver);
         pause(2);
 
-        // Clear all data
-        signIpForms.clearEmail(driver);
-        signIpForms.clearPassword(driver);
-        signIpForms.clearRePassword(driver);
-        signIpForms.clearUsername(driver);
-        pause(2);
-
-
-        // Move to the Community page
-
-        PS_Games ps_games = new PS_Games();
-
-        Assert.assertTrue(ps_games.is_Common_Game_Visibale(driver));
-        ps_games.clickCommonGame(driver);
-        ps_games.getAndroidTypesOfGames(driver);
-        ps_games.blogPostOrder(driver);
-
-        pause(2);
-
-        // Go to the main page
-        main_page.navigate_To_Page_and_Check_Title(driver);
-        Assert.assertTrue(main_page.isMobileButtonVisibale(driver));
-        main_page.clickMobiliButton(driver);
-        main_page.clickDecurseGame(driver);
-        main_page.clickHelpButton(driver);
-        main_page.sentHiInformation(driver);
-        pause(3);
+        main_page.clickLegalInformation(driver);
+        main_page.getTableContent(driver);
+        main_page.done();
 
         driver.close();
 

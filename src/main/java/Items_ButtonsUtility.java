@@ -27,6 +27,15 @@ public class Items_ButtonsUtility {
         }
     }
 
+    public void elementToBeclickable(WebDriver driver,By by){
+        logger.info("elementToBeclickable");
+
+        WebDriverWait myWait = new WebDriverWait(driver, 20);
+        myWait.until(ExpectedConditions.elementToBeClickable(by));
+        driver.findElement(by).click();
+
+    }
+
     public void isSomeTextPresent(WebDriver driver, By by) {
         logger.info("Is Some Text Present");
 
